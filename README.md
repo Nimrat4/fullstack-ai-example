@@ -18,11 +18,12 @@ pipenv shell
 To run the FastAPI Backend 
 ```bash
 cd backend
-uvicorn run main:app.py
+uvicorn main:app --host localhost --port 8080 
 ```
 
 To run the NextJs Frontend
 ```bash
 cd frontend
+npm install
 npm run dev
 ```
