@@ -1,9 +1,19 @@
 from fastapi import FastAPI, Depends
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
 from model import HousePriceRegressionModel
 
 app = FastAPI()
+
+# Define CORS middleware settings
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Allows all origins
+    allow_credentials=True,
+    allow_methods=["*"],  # Allows all methods
+    allow_headers=["*"],  # Allows all headers
+)
 
 # Define a class for your input data with the specified fields
 class PredictionInput(BaseModel):
