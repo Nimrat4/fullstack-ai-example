@@ -2,10 +2,11 @@
 
 // Import necessary hooks and axios for API calls
 import { useState, ChangeEvent, FormEvent } from 'react';
-import axios from 'axios';
+import fetchPrediction from './_request';
 
 // Define a type for the form data to ensure type safety
 type FormData = {
+  [key: string]: string; 
   MedInc: string;
   HouseAge: string;
   AveRooms: string;
@@ -39,33 +40,18 @@ const HousePricePrediction = () => {
   // Handle form submission
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    try {
-      const response = await axios.post('http://localhost:8080/predict/', {
-        ...formData,
-        // Convert string values to numbers as the API expects numbers
-        MedInc: parseFloat(formData.MedInc),
-        HouseAge: parseFloat(formData.HouseAge),
-        AveRooms: parseFloat(formData.AveRooms),
-        AveBedrms: parseFloat(formData.AveBedrms),
-        Population: parseFloat(formData.Population),
-        AveOccup: parseFloat(formData.AveOccup),
-        Latitude: parseFloat(formData.Latitude),
-        Longitude: parseFloat(formData.Longitude),
-      }, {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-      setPrediction(`Prediction: ${response.data.prediction}`);
-    } catch (error) {
-      console.error('Error fetching prediction:', error);
-      setPrediction('Failed to fetch prediction');
-    }
+    
+      const response = await fetchPrediction(formData)
+  
+
+    setPrediction(`Prediction: ${response}`);
+
   };
 
   return (
     <div className="p-8 bg-gradient-to-r from-gray-900 to-black min-h-screen flex flex-col items-center justify-center text-white">
-      <h1 className="text-4xl font-bold mb-8">House Price Prediction Model</h1>
+      <h1 className='text-white'>{}</h1>
+      {/* <h1 className="text-4xl font-bold mb-8">House Price Prediction Model</h1> */}
       <h2 className="text-xl mb-4">Enter your details</h2>
       <form onSubmit={handleSubmit} className="flex flex-col gap-4 items-center">
         {/* Form fields */}
