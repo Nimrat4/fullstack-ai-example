@@ -1,5 +1,7 @@
 # Fullstack AI Example
 Fullstack House pricing analysis model using Sklearn, FastAPI and NextJs
+## Live Project: https://fullstack-ai-example.vercel.app/
+
 
 
 # How to run
