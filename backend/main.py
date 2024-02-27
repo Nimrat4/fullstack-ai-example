@@ -32,8 +32,7 @@ model = None
 @app.on_event("startup")
 def load_model():
     global model
-    filepath = "model_weights//house_price_reg.pkl" 
-
+    filepath =  os.path.join(os.getcwd(), "model_weights/house_price_reg.pkl") 
     model = HousePriceRegressionModel(filepath)
 
 @app.get('/')
