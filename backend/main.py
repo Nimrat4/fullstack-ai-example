@@ -1,7 +1,7 @@
 from fastapi import FastAPI, Depends
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
-
+import os
 from model import HousePriceRegressionModel
 
 app = FastAPI()
@@ -32,7 +32,8 @@ model = None
 @app.on_event("startup")
 def load_model():
     global model
-    filepath = "model_weights\house_price_reg.pkl" 
+    filepath = os.getcwd() # "model_weights\house_price_reg.pkl" 
+
     model = HousePriceRegressionModel(filepath)
 
 @app.get('/')
